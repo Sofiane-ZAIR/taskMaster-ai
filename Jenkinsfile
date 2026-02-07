@@ -38,6 +38,13 @@ pipeline {
                 sh 'docker build -t taskmaster-backend .'
             }
         }
+        // stage ('Docker Push'){
+        //     steps {
+        //         withDockerRegistry([credentialsId : 'dockerhub-cred', url :""]) {
+        //             sh 'docker tag taskmaster-backend:latest '
+        //         }
+        //     }
+        // }
     }
     post {
         success {
