@@ -1,0 +1,11 @@
+services:
+  backend:
+    build: .
+    container_name: taskmaster-backend
+    restart: always
+    ports:
+      - "4000:3000"
+    environment:
+      MONGO_URI: mongodb+srv://sofianozair02:uyvyjAB139u5J5BI@cluster0.l7gffhn.mongodb.net/taskdb?retryWrites=true&w=majority
+      JWT_SECRET: ab357cddbc81e780de64d7a8095a3daf6807ddd246c57d03d1c76dfe68f435409e460b4764009aee4b83c047879e23293e4776b433e5dfbbb1a64e121cbb760c
+    depends_on: []
