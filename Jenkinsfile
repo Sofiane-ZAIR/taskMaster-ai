@@ -27,6 +27,12 @@ pipeline {
                 sh 'npm ci'
             }
         }
+        stage('Check'){
+            steps{
+                sh 'ls -la node_modules/.bin'
+                sh 'eslint -v'
+            }
+        }
 
         stage('Lint') {
             steps {
