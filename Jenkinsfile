@@ -58,7 +58,6 @@ pipeline {
         //         }
         //     }
         // }
-    }
     post {
         success {
             echo 'CI OK ✅'
