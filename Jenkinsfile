@@ -23,10 +23,13 @@ pipeline {
             steps {
                 dir('backEnd') {
                     sh 'npm ci'
+                    sh 'ls -la node_modules/.bin/ | grep eslint'  // Debug
+                    sh 'which node'  // Debug
+                    sh 'which npm'   // Debug
                 }
             }
         }
-        
+
         stage('Lint') {
             steps {
                 dir('backEnd') {
@@ -34,23 +37,17 @@ pipeline {
                 }
             }
         }
-        
-        stage('Build') {
+
+        stage ('Build'){
             steps {
-                dir('backEnd') {
-                    sh 'npm run build'
-                }
+                sh 'npm run build'
             }
         }
-        
-        stage('Docker Build') {
+        stage ('Docker Build'){
             steps {
-                dir('backEnd') {
-                    sh 'docker build -t taskmaster-backend:${BUILD_NUMBER} .'
-                }
+                sh 'docker build -t taskmaster-backend .'
             }
         }
-    }
         // stage ('Docker Push'){
         //     steps {
         //         withDockerRegistry([credentialsId : 'dockerhub-cred', url :""]) {
@@ -58,6 +55,7 @@ pipeline {
         //         }
         //     }
         // }
+    }
     post {
         success {
             echo 'CI OK ✅'

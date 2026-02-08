@@ -7,7 +7,7 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "lint": "./node_modules/.bin/eslint . --ext .ts",
+    "lint": "eslint . --ext .ts",
     "start": "node dist/app.js"
   },
   "keywords": [],
