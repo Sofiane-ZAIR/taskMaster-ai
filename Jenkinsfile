@@ -4,10 +4,8 @@ pipeline {
         NODE_ENV = 'production'
         JWT_SECRET = credentials('JWT_SECRET')
         MONGO_URI = credentials('MONGO_URI')
-    }
-
-    environment {
         PATH = "/opt/homebrew/bin:$PATH"
+
     }
 
     stages {
