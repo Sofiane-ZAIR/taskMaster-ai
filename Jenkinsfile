@@ -52,7 +52,6 @@ pipeline {
         //         }
         //     }
         // }
-    }
     post {
         success {
             echo 'CI OK ✅'
@@ -61,5 +60,4 @@ pipeline {
             echo 'CI Failed ❌'
         }
     }
-
 }
