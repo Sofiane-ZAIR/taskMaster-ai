@@ -5,6 +5,7 @@ pipeline {
         NODE_ENV = 'development'
         JWT_SECRET = credentials('JWT_SECRET')
         MONGO_URI = credentials('MONGO_URI')
+        PATH = "${WORKSPACE}/node_modules/.bin:/opt/homebrew/bin:$PATH"
     }
 
     stages {
@@ -22,9 +23,9 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Installe exactement ce qui est dans package-lock.json
                 sh 'node -v'
-                sh 'npm install'
+                // Installe exactement ce qui est dans package-lock.json
+                sh 'npm ci'
             }
         }
         stage('Check'){
