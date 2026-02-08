@@ -1,11 +1,11 @@
 pipeline {
-   agent any
+    agent any
+
     environment {
         NODE_ENV = 'production'
         JWT_SECRET = credentials('JWT_SECRET')
         MONGO_URI = credentials('MONGO_URI')
-        PATH = "/opt/homebrew/bin:$PATH"
-
+        PATH = "${WORKSPACE}/node_modules/.bin:/opt/homebrew/bin:$PATH"
     }
 
     stages {
@@ -14,45 +14,40 @@ pipeline {
                 echo 'Starting CI Pipeline for TaskMaster Backend 🚀'
             }
         }
-        
+
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-        
+
         stage('Install Dependencies') {
             steps {
+                // Installe exactement ce qui est dans package-lock.json
                 sh 'npm ci'
             }
         }
+
         stage('Lint') {
             steps {
-                withEnv(["PATH=${WORKSPACE}/node_modules/.bin:$PATH"]) {
-                    sh 'npm run lint'
-                }
+                // Utilise npx pour s'assurer que le binaire local est utilisé
+                sh 'npx eslint . --ext .ts'
             }
         }
-                
+
         stage('Build') {
             steps {
                 sh 'npm run build'
             }
         }
-        
+
         stage('Docker Build') {
             steps {
                 sh 'docker build -t taskmaster-backend:${BUILD_NUMBER} .'
             }
         }
     }
-        // stage ('Docker Push'){
-        //     steps {
-        //         withDockerRegistry([credentialsId : 'dockerhub-cred', url :""]) {
-        //             sh 'docker tag taskmaster-backend:latest '
-        //         }
-        //     }
-        // }
+
     post {
         success {
             echo 'CI OK ✅'
