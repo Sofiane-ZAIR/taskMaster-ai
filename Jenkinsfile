@@ -1,25 +1,24 @@
 pipeline {
-    agent any
-    
+   agent any
     environment {
-        PATH = "/Users/sofianezair/.nvm/versions/node/v16.20.2/bin:${env.PATH}"
-        JWT_SECRET = credentials('jwt-secret')
-        MONGO_URI = credentials('mongo-uri')
+        NODE_ENV = 'production'
+        JWT_SECRET = credentials('JWT_SECRET')
+        MONGO_URI = credentials('MONGO_URI')
+        PATH = "/opt/homebrew/bin:$PATH"
+
     }
-    
+
     stages {
-        stage('Hello') {
+        stage('Hello'){
             steps {
                 echo 'Starting CI Pipeline for TaskMaster Backend 🚀'
             }
         }
-        
-        stage('Checkout') {
+        stage('Checkout'){
             steps {
                 checkout scm
             }
         }
-        
         stage('Install Dependencies') {
             steps {
                 dir('backEnd') {
@@ -52,13 +51,21 @@ pipeline {
             }
         }
     }
-    
+        // stage ('Docker Push'){
+        //     steps {
+        //         withDockerRegistry([credentialsId : 'dockerhub-cred', url :""]) {
+        //             sh 'docker tag taskmaster-backend:latest '
+        //         }
+        //     }
+        // }
+    }
     post {
         success {
-            echo 'CI Passed ✅'
+            echo 'CI OK ✅'
         }
         failure {
             echo 'CI Failed ❌'
         }
     }
+
 }
