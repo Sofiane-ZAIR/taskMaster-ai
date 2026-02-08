@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NODE_ENV = 'production'
+        NODE_ENV = 'development'
         JWT_SECRET = credentials('JWT_SECRET')
         MONGO_URI = credentials('MONGO_URI')
         PATH = "${WORKSPACE}/node_modules/.bin:/opt/homebrew/bin:$PATH"
