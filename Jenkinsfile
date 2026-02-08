@@ -6,6 +6,10 @@ pipeline {
         MONGO_URI = credentials('MONGO_URI')
     }
 
+    tools {
+        nodejs 'Node20'
+    }
+
     stages {
         stage('Hello'){
             steps {
