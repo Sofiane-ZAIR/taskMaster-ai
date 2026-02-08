@@ -21,12 +21,12 @@ pipeline {
         }
         stage('Install Dependencies'){
             steps {
-                sh 'npm install'
+                sh 'npm ci'
             }
         }
         stage('Lint'){
             steps {
-                sh 'npx eslint . --ext .ts'
+                sh 'npm run lint'
             }
         }
         stage ('Build'){
