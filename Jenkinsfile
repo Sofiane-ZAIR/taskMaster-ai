@@ -37,7 +37,7 @@ pipeline {
         stage('Lint') {
             steps {
                 // Utilise npx pour s'assurer que le binaire local est utilisé
-                sh 'npx eslint . --ext .ts'
+                sh 'npm run lint'
             }
         }
 
