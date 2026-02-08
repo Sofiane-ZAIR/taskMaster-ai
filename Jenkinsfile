@@ -23,6 +23,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Installe exactement ce qui est dans package-lock.json
+                sh 'node -v'
                 sh 'npm install'
             }
         }
