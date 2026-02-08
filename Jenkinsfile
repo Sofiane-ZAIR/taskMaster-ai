@@ -21,20 +21,13 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                dir('backEnd') {
-                    sh 'npm ci'
-                    sh 'ls -la node_modules/.bin/ | grep eslint'  // Debug
-                    sh 'which node'  // Debug
-                    sh 'which npm'   // Debug
-                }
+                sh 'npm install'
             }
         }
 
         stage('Lint') {
             steps {
-                dir('backEnd') {
-                    sh 'npm run lint'
-                }
+                sh 'npm run lint'
             }
         }
 
