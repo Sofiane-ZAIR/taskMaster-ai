@@ -6,8 +6,8 @@ pipeline {
         MONGO_URI = credentials('MONGO_URI')
     }
 
-    tools {
-        nodejs 'Node20'
+    environment {
+        PATH = "/opt/homebrew/bin:$PATH"
     }
 
     stages {
