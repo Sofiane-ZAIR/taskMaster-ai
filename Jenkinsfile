@@ -26,7 +26,8 @@ pipeline {
         }
         stage('Lint'){
             steps {
-                sh 'npm run lint'
+                sh "lint": "./node_modules/.bin/eslint . --ext .ts"
+
             }
         }
         stage ('Build'){
