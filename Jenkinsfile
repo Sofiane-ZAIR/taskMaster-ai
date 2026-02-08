@@ -21,7 +21,14 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                dir('backEnd') {
+                    sh 'pwd'  // Voir où on est
+                    sh 'ls -la'  // Voir ce qu'il y a
+                    sh 'npm ci'
+                    sh 'ls -la'  // Voir ce qui a changé après npm ci
+                    sh 'ls -la node_modules/ 2>&1 || echo "node_modules n existe pas"'
+                    sh 'find . -name "eslint" -type f 2>/dev/null || echo "eslint introuvable"'
+                }
             }
         }
 
